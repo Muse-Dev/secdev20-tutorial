@@ -17,8 +17,8 @@ function tellVersion() {
 function getTool() {
   pushd /tmp >/dev/null
   apt update >/dev/null && apt install -y golang >/dev/null
-  curl -LO https://github.com/dominikh/go-tools/releases/download/2020.1.5/staticcheck_linux_amd64.tar.gz >/dev/null
-  tar xzf staticcheck_linux_amd64.tar.gz >/dev/null
+  curl -LO https://raw.githubusercontent.com/smagill/secdev20/master/staticcheck
+  chmod a+x staticcheck
   popd >/dev/null
 }
 
@@ -31,7 +31,7 @@ function emit_results() {
 
 function run() {
     getTool
-    raw_results=$(/tmp/staticcheck/staticcheck -f json -fail "" ./...)
+    raw_results=$(/tmp/staticcheck -f json -fail "" ./...)
     emit_results "$raw_results"
 }
 
