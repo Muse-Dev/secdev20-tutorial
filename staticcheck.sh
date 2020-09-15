@@ -31,6 +31,7 @@ function emit_results() {
 
 function run() {
     getTool
+    go get ./...
     raw_results=$(/tmp/staticcheck -f json -fail "" ./...)
     emit_results "$raw_results"
 }
