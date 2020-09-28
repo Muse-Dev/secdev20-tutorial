@@ -101,14 +101,14 @@ the secdev20-tutorial repository as `hello_world_tool.sh`.
 Modify `secdev20-tutorial/.muse/config.toml` to say:
     customTools = ["hello_world_tool.sh"]
 
-Go to `console.muse.dev` and analyze the secdev20-tutorial repo again.  After a few minutes you should see a "Hello World" message among the tool results.
+Go to (console.muse.dev)[https://console.muse.dev] and analyze the secdev20-tutorial repo again.  After a few minutes you should see a "Hello World" message among the tool results.
 
 ### Try A More Complex Custom Tool
 
 To see a 'Hello World' example with more results, try changing `secdev20-tutorial/.muse/config.toml` to say:
     customTools = ["hello-muse.sh"]
 
-Save and again click the Analyze button on the secdev20-tutorial repo on `console.muse.dev`.  After a few minutes you should see several results that list the files over 1337 lines in the repository with messages stating who checked those files in.
+Save and again click the Analyze button on the secdev20-tutorial repo on (console.muse.dev)[https://console.muse.dev].  After a few minutes you should see several results that list the files over 1337 lines in the repository with messages stating who checked those files in.
 
 ### Add Support For Go's StaticCheck Tool
 
@@ -124,7 +124,58 @@ We will use this tool to analyze the "Gen" project.  Go to:
 Fork the repository.  In your fork of the repo, add a `.muse/` directory containing two files:
  1. `run_staticcheck.sh` (from the `secdev20-tutorial` repo)
  2. `config.toml` (containing the single line `customTools = [".muse/run_staticcheck.sh"]`)
+
+Go to (console.muse.dev)[https://console.muse.dev], find the Gen repo, and click "Analyze".  In a few minutes you should see several results.
+
+### Run Staticcheck using Muscle
+
+First we will set up your Muse API Token.  Assuming a Bash shell, this can be done with the following.
+
+    export MUSEDEV_TOKEN="<token>"
+
+where `<token>` is the string you obtained when you requested a Muse API Token.
+
+To trigger analsis of Gen from the command line, type:
+
+    muscle analyze <gh_username> gen
+
+where `<gh_username>` is your GitHub username.  You should see a job ID printed to the console.
+To check status, type:
+
+    muscle status <job_id>
+
+When the job has completed (status is "JobCompletedSuccess"), type:
+
+    muscle results <job_id>
     
+to get the results in a JSON format.
+
+### Run Staticcheck at Scale
+
+Load the Jupyter notebook we'll use for our experiments:
+
+    cd notebooks
+    jupyter notebook
+    
+A web browser should open with a list of notebooks.  Open the "Experiments" notebook.
+The rest of the tutorial takes place in the "Experiments" notebook and is explained in comments in that notebook.
 
 ### Useful Commands
-docker run --rm -it -v (pwd):/code musedev/build-test bash
+
+#### Checking Use of the Muse API
+
+You can  use the `check-muse-api.sh` script to check that your custom script conforms to the Muse API. Usage is:
+
+    ./check-muse-api.sh <script_name> <directory>
+
+where `<script_name>` is the name of your custom script and `<directory>` is the directory to run it in (whatever directory contains code for it to analyze).
+
+#### Debugging With Docker 
+
+To debug issues with a custom tool, it can be helpful to run the tool in a docker container that matches Muse's analysis environment.
+To do this, type:
+
+    docker run --rm -it -v `pwd`:/code musedev/build-test bash
+
+This will start a docker container that matches Muse's run-time environment and will mount the current directory as `/code` within that container.
+You will get a bash terminal and can now try checking out code, running your custom tool, looking at results, and running the `check-muse-api.sh` script.
