@@ -59,22 +59,21 @@ Find the forked repository and click `analyze`.  About five minutes later you sh
 
 ### Observe Pull Request Operation
 Using the GitHub edit UI, navigate to the file at:
-  vulnerability-java-samples/src/main/java/io/meterian/samples/jackson/ProductsDatabase.java
+
+    vulnerability-java-samples/src/main/java/io/meterian/samples/jackson/ProductsDatabase.java
 
 Click the pencil icon to edit the file.
 
-Add the lines marked with a plus below (they will go right after line 8). Do not copy the '+' character:
+Add the lines marked with a plus below (they will go right after line 29). Do not copy the '+' character:
 ```
-   import java.util.concurrent.atomic.AtomicInteger;
-  +import net.jcip.annotations.ThreadSafe;
-  
-  +@ThreadSafe
-   public class ProductsDatabase {
+  + synchronized
+    public Product add(Product newProduct) {
 ```
 
 Click 'save' and select 'Create a new branch for this commit and start a pull request.' (you can accept the default branch name or change it)
 
 Click 'Propose changes'.  On the next page, click 'Create pull request'.
+
 You should now see a message from musedev saying 'Pending — Analyzing. Musebot needs a minute'.
 
 In about five minutes you should see the check complete and comments appear in the pull request to indicating that variables in the class are now inconsistently synchronized.
