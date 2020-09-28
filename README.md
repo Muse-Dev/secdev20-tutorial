@@ -3,39 +3,47 @@
 This repository contains all resources and instructions for the Muse tutorial presented at SecDev 2020.
 
 ## Requirements
-GitHub Account
-  (sign up at: https://github.com)
+GitHub Account (sign up at: https://github.com)
 
-MuseDev Account
-  (sign up at: https://console.muse.dev)
+MuseDev Account (sign up at: https://console.muse.dev)
 
-Muse GitHub App
-  (install from: https://github.com/apps/muse-dev)
+Muse GitHub App (install from: https://github.com/apps/muse-dev)
 
 Jupyter
-  `pip3 install notebook`
+
+    pip3 install notebook
 
 Install Python GitHub Library, and Git Library
-  `pip3 install pygithub gitpython`
+
+    pip3 install pygithub gitpython
 
 Install Python Pandas and Matplotlib Libraries
-  `pip3 installl pandas matplotlib`
 
-Install Muscle (MUse Command Line Environment):
-  `pip3 install muscle-musedev`
+    pip3 installl pandas matplotlib
+
+Install Muscle (MUse Command Line Environment)
+
+    pip3 install muscle-musedev
 
 Produce a GitHub Token
-  https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
+ * https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
 
 Produce a Muse Authentication Token
-  Email tommd@muse.dev or DM @MDTom on Twitter
+ * Email tommd@muse.dev or DM @MDTom on Twitter
 
 ### Optional Requirements
 
 Docker Image:
-  ???
+    docker pull musedev/build-test
 
 `jq` command line utility
+ * On Mac
+ 
+    `brew install jq`
+     
+ * On Linux
+ 
+    `apt-get install jq`
 
 ## Tutorial
 
