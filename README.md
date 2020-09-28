@@ -101,14 +101,14 @@ the secdev20-tutorial repository as `hello_world_tool.sh`.
 Modify `secdev20-tutorial/.muse/config.toml` to say:
     customTools = ["hello_world_tool.sh"]
 
-Go to (console.muse.dev)[https://console.muse.dev] and analyze the secdev20-tutorial repo again.  After a few minutes you should see a "Hello World" message among the tool results.
+Go to [console.muse.dev](https://console.muse.dev) and analyze the secdev20-tutorial repo again.  After a few minutes you should see a "Hello World" message among the tool results.
 
 ### Try A More Complex Custom Tool
 
 To see a 'Hello World' example with more results, try changing `secdev20-tutorial/.muse/config.toml` to say:
     customTools = ["hello-muse.sh"]
 
-Save and again click the Analyze button on the secdev20-tutorial repo on (console.muse.dev)[https://console.muse.dev].  After a few minutes you should see several results that list the files over 1337 lines in the repository with messages stating who checked those files in.
+Save and again click the Analyze button on the secdev20-tutorial repo on [console.muse.dev](https://console.muse.dev).  After a few minutes you should see several results that list the files over 1337 lines in the repository with messages stating who checked those files in.
 
 ### Add Support For Go's StaticCheck Tool
 
@@ -119,13 +119,13 @@ using the Muse Plugin API.
 
 We will use this tool to analyze the "Gen" project.  Go to:
 
-    [https://github.com/clipperhouse/gen]
+    https://github.com/clipperhouse/gen
 
 Fork the repository.  In your fork of the repo, add a `.muse/` directory containing two files:
  1. `run_staticcheck.sh` (from the `secdev20-tutorial` repo)
  2. `config.toml` (containing the single line `customTools = [".muse/run_staticcheck.sh"]`)
 
-Go to (console.muse.dev)[https://console.muse.dev], find the Gen repo, and click "Analyze".  In a few minutes you should see several results.
+Go to [console.muse.dev)](https://console.muse.dev), find the Gen repo, and click "Analyze".  In a few minutes you should see several results.
 
 ### Run Staticcheck using Muscle
 
