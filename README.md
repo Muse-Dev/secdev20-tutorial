@@ -86,13 +86,45 @@ Java static analysis tools included in Muse.
 
 While Infer finds five instances of potential data races, only one result is reported in the pull request.  This is because GitHub only allows comments on lines of code that are close to lines that were changed in the pull request. To see the rest of the errors, click on 'Details' in the Muse status line at the bottom of the pull request.
 
+Since we are done analyzing the `vulnerability-java-samples` directory, we can remove the Muse config for that sub-project to help future analyses go faster.  Remove the file `vulnerability-java-samples/.muse.toml`.
+
 ### Create a Custom Tool
+
 Running Infer and the other tools built into Muse is great, but what if you have your own tool that you want to include?  Muse supports a plugin interface that allows you to add custom tools.  We will demonstrate this by adding support for Go by including StaticCheck as a custom static analysis tool.
 
 The documentation for the Muse plugin API is here:
   https://docs.muse.dev/docs/extending-muse/
 
+A 'hello world' tool is given at the bottom of that page and stored in
+the secdev20-tutorial repository as `hello_world_tool.sh`.
 
+Modify `secdev20-tutorial/.muse/config.toml` to say:
+    customTools = ["hello_world_tool.sh"]
+
+Go to `console.muse.dev` and analyze the secdev20-tutorial repo again.  After a few minutes you should see a "Hello World" message among the tool results.
+
+### Try A More Complex Custom Tool
+
+To see a 'Hello World' example with more results, try changing `secdev20-tutorial/.muse/config.toml` to say:
+    customTools = ["hello-muse.sh"]
+
+Save and again click the Analyze button on the secdev20-tutorial repo on `console.muse.dev`.  After a few minutes you should see several results that list the files over 1337 lines in the repository with messages stating who checked those files in.
+
+### Add Support For Go's StaticCheck Tool
+
+The file `secdev20-tutorial/staticcheck` contains a 64-bit Linux binary for the Staticcheck tool.
+
+The file `secdev20-tutorial/run_staticcheck.sh` contains a script that downloads this binary as well as its dependencies and runs it
+using the Muse Plugin API.
+
+We will use this tool to analyze the "Gen" project.  Go to:
+
+    [https://github.com/clipperhouse/gen]
+
+Fork the repository.  In your fork of the repo, add a `.muse/` directory containing two files:
+ 1. `run_staticcheck.sh` (from the `secdev20-tutorial` repo)
+ 2. `config.toml` (containing the single line `customTools = [".muse/run_staticcheck.sh"]`)
+    
 
 ### Useful Commands
 docker run --rm -it -v (pwd):/code musedev/build-test bash
